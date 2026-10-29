@@ -1,0 +1,38 @@
+name: Compilar APK Android
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Instalar Flutter estable
+        run: |
+          git clone --depth 1 --branch stable https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - name: Preparar dependencias
+        run: flutter pub get
+      - name: Analizar y probar
+        run: |
+          flutter analyze
+          flutter test
+      - name: Generar iconos
+        run: dart run flutter_launcher_icons
+      - name: Compilar APK
+        run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MultiHerramientas-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error

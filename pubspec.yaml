@@ -1,0 +1,33 @@
+name: multiherramientas
+description: Proyecto universitario con ocho vistas y APIs públicas.
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: ^3.10.0
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  http: ^1.6.0
+  url_launcher: ^6.3.3
+  audioplayers: ^6.8.1
+  # Limpia el HTML y las entidades de las noticias de WordPress.
+  html: ^0.15.6
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: assets/images/perfil_icono.png
+  adaptive_icon_background: '#EAF2EE'
+  adaptive_icon_foreground: assets/images/perfil_icono.png
+  adaptive_icon_foreground_inset: 16
